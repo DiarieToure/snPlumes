@@ -21,7 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'number',
+        'adresse',
+        'user_type',
     ];
+    CONST Admin_user='Admin';
+    CONST Regular_user='Editor';
 
     /**
      * The attributes that should be hidden for serialization.
