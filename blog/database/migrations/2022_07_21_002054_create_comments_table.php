@@ -18,7 +18,7 @@ return new class extends Migration
             $table->String('name_comment');
             $table->String('alphabet');
             $table->String('comment',1000);
-            $table->integer('id_post')->index()->unsigned();
+            $table->integer('post_id')->index()->unsigned();
 
             $table->timestamps();
         });

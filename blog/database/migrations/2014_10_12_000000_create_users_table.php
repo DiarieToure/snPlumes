@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('adresse');
             $table->integer('number')->unsigned();
-            $table->string('userType')->default(User::Regular_user);
+            $table->string('user_type')->default(User::Regular_user);
             $table->rememberToken();
             $table->timestamps();
         });

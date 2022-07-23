@@ -40,7 +40,9 @@ class AuthController extends Controller
         $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+            'password'=>Hash::make($request->password),
+            'number'=>$request->number,
+            'user_type'=>$request->user_type,
 
         ]);
 
@@ -100,8 +102,6 @@ public function logout(Request $request){
     return response()->json([
         'message'=>'user successful logout'
     ],200);
-
-   
 
 
 }
