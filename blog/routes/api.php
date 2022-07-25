@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Comment\CommentController;
 
 
 /*
@@ -31,3 +32,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('users',UserController::class);
 Route::resource('posts',PostController::class);
 Route::resource('categories',CategoryController::class);
+Route::resource('comments',CommentController::class);
