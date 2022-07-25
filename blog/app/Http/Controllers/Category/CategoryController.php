@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 
 
-class PostController extends Controller
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $Posts=Post::all();
-        return ['post'=>$Posts];
         
+        $category=Category::all();
+        return ['Categories'=>$category];
     }
 
     /**
@@ -40,14 +41,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
-
         $validator=Validator::make($request->all(),[
-            'title'=>'required|min:2|max:100',
-            'content'=>'required|min:2|max:2000',
-            'user_id'=>'required',
-
-
+            'name'=>'required|min:2|max:100',
+            'description'=>'required|min:2|max:1000',
+        
         ]);
 
 
@@ -59,17 +56,19 @@ class PostController extends Controller
              
         }
 
-        $post=Post::create([
-            'title'=>$request->title,
-            'content'=>$request->content,
-            'user_id'=>$request->user_id,
-            'category_id'=>$request->category_id,
-            'image'=>$request->image
-          
+        $category=Category::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+     
 
         ]);
 
-         return ['post'=>$post];
+        // return response()->json([
+        //     'message'=>'Registration',
+        //     'data'->$category
+        // ],200);
+
+         return ['category'=>$category];
     }
 
     /**
@@ -80,8 +79,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post= Post::findOrFail($id);
-        return ['post'=>$post];
+        $category=Category::findOrFail($id);
+        return['categories'=>$category];
     }
 
     /**
@@ -104,9 +103,9 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post= Post::findOrFail($id);
-        $post->update($request->all());
-         return ['post'=>$post];
+        $category=Category::findOrFail($id);
+        $category->update($request->all());
+        return ['categories'=>$category];
     }
 
     /**
@@ -117,8 +116,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post= Post::findOrFail($id);
-        $post->delete();
-        return ['status'=>'post deleted successfully'];
+        $category=Category::findOrFail($id);
+        $category->delete();
+        return ["status"=>"Category deleted successfully"];
     }
 }

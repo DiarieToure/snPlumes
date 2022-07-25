@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->String('title');
-            $table->String('sub-content',1000);
-            $table->String('content',2000);
+            $table->string('title');
+            $table->string('content',2000);
             $table->integer('user_id')->index()->unsigned();
             $table->integer('category_id')->index()->unsigned();
-            $table->string('image');
+            $table->string('image')->nullable();
 
 
             $table->timestamps();
