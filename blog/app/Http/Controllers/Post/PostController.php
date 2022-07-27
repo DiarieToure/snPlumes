@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $Posts=Post::all();
+        $Posts=Post::with('category')->get();
         return ['post'=>$Posts];
         
     }
@@ -45,6 +45,7 @@ class PostController extends Controller
         $validator=Validator::make($request->all(),[
             'title'=>'required|min:2|max:100',
             'content'=>'required|min:2|max:2000',
+            'sub_content'=>'required|min:2|max:1000',
             'user_id'=>'required',
 
 
@@ -62,6 +63,7 @@ class PostController extends Controller
         $post=Post::create([
             'title'=>$request->title,
             'content'=>$request->content,
+            'sub_content'=>$request->sub_content,
             'user_id'=>$request->user_id,
             'category_id'=>$request->category_id,
             'image'=>$request->image
@@ -80,7 +82,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post= Post::findOrFail($id);
+        $post= Post::with('comments')->findOrFail($id);
         return ['post'=>$post];
     }
 
